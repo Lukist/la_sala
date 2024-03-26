@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actividades.Alumnos"
+    android:background="#fff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/alumnos_back">
+
+            <TextView
+                android:id="@+id/activiy_alumnos__tv_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginLeft="30dp"
+                android:text="ALUMNOS"
+                android:textColor="@color/texto"
+                android:textSize="50dp"
+                />
+
+            <ImageView
+                android:id="@+id/activiy_alumnos__iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/alumnos_logo"
+                android:layout_below="@id/activiy_alumnos__tv_titulo"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="29dp"/>
+
+            <TextView
+                android:id="@+id/activiy_alumnos__tv_subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activiy_alumnos__iv_logo"
+                android:layout_marginTop="56dp"
+                android:layout_marginLeft="30dp"
+                android:text="Lista de chicos"
+                android:textSize="30dp"
+                android:textColor="@color/texto"/>
+
+            <ImageButton
+                android:id="@+id/activiy_alumnos__ib_btn_agregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_button"
+                android:layout_below="@id/activiy_alumnos__iv_logo"
+                android:layout_toRightOf="@id/activiy_alumnos__tv_subtitulo"
+                android:layout_marginTop="37dp"
+                android:layout_marginLeft="38dp"/>
+
+            <ListView
+                android:id="@+id/activiy_alumnos__lv_lista_alumnos"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/activiy_alumnos__tv_subtitulo"
+                android:layout_marginTop="48dp"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

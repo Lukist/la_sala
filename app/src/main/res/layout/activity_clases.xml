@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actividades.Clases"
+    android:background="#fff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/activity_clases__rl_creacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clases_back"
+            >
+
+            <ImageView
+                android:id="@+id/activity_clases__iv_logo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clases_logo1"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="51dp"/>
+
+            <TextView
+                android:id="@+id/activity_clases__tv_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLASES"
+                android:textSize="50dp"
+                android:textColor="@color/texto"
+                android:layout_marginTop="104dp"
+                android:layout_marginLeft="154dp"/>
+
+            <ImageView
+                android:id="@+id/activity_clases__iv_logo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clases_logo2"
+                android:layout_below="@id/activity_clases__tv_titulo"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="53dp"
+                android:layout_marginRight="70dp"/>
+
+            <TextView
+                android:id="@+id/activity_clases__tv_crear_clase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_clases__iv_logo2"
+                android:text="Crear Clase"
+                android:textSize="30dp"
+                android:textColor="@color/texto"
+                android:layout_marginTop="-40dp"
+                android:layout_marginLeft="12dp"/>
+
+            <EditText
+                android:id="@+id/activity_clases__et_input_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_clases__tv_crear_clase"
+                android:background="@drawable/input_style"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="46dp"
+                android:paddingVertical="15dp"
+                android:hint="Nombre"
+                android:textColorHint="#7B8794"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+                android:paddingLeft="35dp"
+                android:drawableLeft="@drawable/baseline_music_note_24"
+                android:drawablePadding="15dp"
+                android:drawableTint="#7B8794"/>
+
+            <EditText
+                android:id="@+id/activity_clases__et_input_precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_clases__et_input_nombre"
+                android:background="@drawable/input_style"
+                android:layout_marginTop="28dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="46dp"
+                android:paddingVertical="15dp"
+                android:hint="Precio"
+                android:textColorHint="#7B8794"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+                android:paddingLeft="35dp"
+                android:drawableLeft="@drawable/baseline_attach_money_24"
+                android:drawablePadding="15dp"
+                android:drawableTint="#7B8794"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_clases__et_input_precio"
+                android:layout_marginTop="28dp"
+                android:layout_marginLeft="12dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="30dp"
+                android:text="INGRESAR"
+                android:textColor="@color/texto"
+                android:backgroundTint="@color/rosaPrincipal"
+                />
+
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/activity_clases__rl_clases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_clases__rl_creacion"
+            android:layout_marginTop="-290dp">
+
+            <ImageView
+                android:id="@+id/activity_clases__iv_clases_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clases_divider"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"/>
+
+            <TextView
+                android:id="@+id/activity_clases__tv_subtitulo_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alumnos en deuda"
+                android:layout_below="@id/activity_clases__iv_clases_divider"
+                android:layout_marginTop="48dp"
+                android:layout_marginLeft="12dp"
+                android:textSize="30dp"
+                android:textColor="@color/texto"
+                />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/activity_clases__tv_subtitulo_divider"
+                android:layout_marginTop="15dp"/>
+
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

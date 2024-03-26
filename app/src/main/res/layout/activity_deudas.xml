@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actividades.Deudas"
+    android:background="#fff"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:id="@+id/activity_deudas__rl_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/deudores_back">
+
+            <ImageView
+                android:id="@+id/activity_deudas__logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/deudas_logo"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/activity_deudas__tv_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alumnos\nal dia"
+                android:textSize="30dp"
+                android:textColor="@color/texto"
+                android:layout_below="@id/activity_deudas__logo"
+                android:layout_marginTop="-80dp"
+                android:layout_marginLeft="27dp"/>
+
+            <ListView
+                android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/activity_deudas__logo"
+                android:layout_marginTop="30dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_deudas__rl_header"
+            android:layout_marginTop="-200dp"
+            >
+
+            <ImageView
+                android:id="@+id/activity_deudas__iv_blob_deudores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/blob_deuda_divider"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/activity_deudas__iv_deudores_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/deuda_divider"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="27dp"/>
+
+            <TextView
+                android:id="@+id/activity_deudas__tv_subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alumnos en deuda"
+                android:textColor="@color/texto"
+                android:layout_below="@id/activity_deudas__iv_deudores_divider"
+                android:textSize="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/activity_deudas__tv_subtitulo"
+                android:layout_marginTop="31dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>
