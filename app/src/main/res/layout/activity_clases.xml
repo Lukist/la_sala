@@ -127,28 +127,29 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="40dp"/>
 
-            <TextView
-                android:id="@+id/activity_clases__tv_subtitulo_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alumnos en deuda"
-                android:layout_below="@id/activity_clases__iv_clases_divider"
-                android:layout_marginTop="48dp"
-                android:layout_marginLeft="12dp"
-                android:textSize="30dp"
-                android:textColor="@color/texto"
-                />
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@id/activity_clases__tv_subtitulo_divider"
-                android:layout_marginTop="15dp"/>
-
-
 
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/activity_clases__tv_subtitulo_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alumnos en deuda"
+            android:layout_below="@id/activity_clases__rl_creacion"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="12dp"
+            android:textSize="30dp"
+            android:textColor="@color/texto"
+            />
+
+        <com.example.la_sala_project.utils.NonScrollListView
+            android:id="@+id/activity_clases__lv_clases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_clases__tv_subtitulo_divider"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="50dp"/>
     </RelativeLayout>
 
 

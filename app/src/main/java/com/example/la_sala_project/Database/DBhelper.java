@@ -149,4 +149,31 @@ public class DBhelper extends SQLiteAssetHelper {
             db.close();
         }
     }
+
+    public List<ModeloClase> buscarClases() {
+        List<ModeloClase> returnList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT DISTINCT * FROM clases";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int clase_id = cursor.getInt(0);
+                String clase_nombre = cursor.getString(1);
+                double clase_precio = cursor.getDouble(2);
+
+                ModeloClase clase = new ModeloClase(clase_id, clase_nombre, clase_precio);
+
+                returnList.add(clase);
+            } while (cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }
