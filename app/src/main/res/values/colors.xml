@@ -10,4 +10,5 @@
     <color name="texto">#323F4B</color>
     <color name="rosaPrincipal">#FCDEE0</color>
     <color name="celestePrincipal">#DEFCFA</color>
+    <color name="rosaSecundario">#F8AFB4</color>
 </resources>

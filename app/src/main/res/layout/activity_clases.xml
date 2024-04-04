@@ -96,6 +96,7 @@
                 android:drawableTint="#7B8794"/>
 
             <Button
+                android:id="@+id/activity_clases__btn_ingresar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_clases__et_input_precio"

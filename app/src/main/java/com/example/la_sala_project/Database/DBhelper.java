@@ -2,9 +2,11 @@ package com.example.la_sala_project.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.la_sala_project.modelos.ModeloAlumno;
+import com.example.la_sala_project.modelos.ModeloClase;
 import com.example.la_sala_project.modelos.ModeloTutor;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -13,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBhelper extends SQLiteAssetHelper {
 
@@ -99,6 +103,47 @@ public class DBhelper extends SQLiteAssetHelper {
             cv.put("id_hijo", tutor.getId_hijo());
 
             long nuevaFila = db.insert("tutor_table", null, cv);
+            return nuevaFila;
+        } finally {
+            db.close();
+        }
+    }
+
+    public List<ModeloAlumno> buscarAlumnos() {
+        List<ModeloAlumno> returnList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT DISTINCT * FROM hijo_table";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int alumno_id = cursor.getInt(0);
+                String alumno_nombre = cursor.getString(1);
+                String alumno_apellido = cursor.getString(2);
+
+                ModeloAlumno alumno = new ModeloAlumno(alumno_id, alumno_nombre, alumno_apellido);
+                returnList.add(alumno);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public long insertarClase(ModeloClase clase) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        try {
+            ContentValues cv = new ContentValues();
+
+            cv.put("nombre", clase.getNombre_clase());
+            cv.put("precio", clase.getPrecio());
+
+            long nuevaFila = db.insert("clases", null, cv);
             return nuevaFila;
         } finally {
             db.close();
