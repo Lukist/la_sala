@@ -29,7 +29,7 @@
         />
 
     <EditText
-        android:id="@+id/dialog_form_tutor__input_nombre"
+        android:id="@+id/dialog_form_alumno__input_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_form_tutor__label_nombre"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/dialog_form_tutor__input_nombre"
+        android:layout_below="@id/dialog_form_alumno__input_nombre"
         android:text="Apellido: "
         android:textColor="@color/texto"
         android:textSize="20dp"

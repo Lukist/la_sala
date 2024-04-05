@@ -72,8 +72,10 @@ public class DBhelper extends SQLiteAssetHelper {
         return context.getDatabasePath(DATABASE_NAME).getPath();
     }
 
-    public long insertarAlumno(ModeloAlumno alumno) {
+    public List<Long> insertarAlumno(ModeloAlumno alumno, List<ModeloClase> clasesSeleccionadas) {
         SQLiteDatabase db = getWritableDatabase();
+        List<Long> lista_ids = new ArrayList<>();
+        long exito = 0;
 
         try {
             ContentValues cv = new ContentValues();
@@ -82,7 +84,21 @@ public class DBhelper extends SQLiteAssetHelper {
             cv.put("apellido", alumno.getApellido());
 
             long nuevaFila = db.insert("hijo_table", null, cv);
-            return nuevaFila;
+            if (nuevaFila != -1) {
+                ContentValues contentValues = new ContentValues();
+
+                for (ModeloClase clase : clasesSeleccionadas) {
+                    contentValues.put("id_hijo", nuevaFila);
+                    contentValues.put("id_clase", clase.getId_clase());
+
+                    exito = db.insert("clases_hijo", null, contentValues);
+
+                }
+            }
+
+            lista_ids.add(nuevaFila);
+            lista_ids.add(exito);
+            return lista_ids;
         } finally {
             db.close();
         }

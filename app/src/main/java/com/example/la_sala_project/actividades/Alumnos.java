@@ -14,8 +14,11 @@ import com.example.la_sala_project.Database.DBhelper;
 import com.example.la_sala_project.R;
 import com.example.la_sala_project.adaptadores.alumnosAdapter;
 import com.example.la_sala_project.modelos.ModeloAlumno;
+import com.example.la_sala_project.modelos.ModeloClase;
 import com.example.la_sala_project.modelos.ModeloTutor;
 import com.example.la_sala_project.utils.MyDialog;
+
+import java.util.List;
 
 public class Alumnos extends AppCompatActivity {
 
@@ -56,13 +59,13 @@ public class Alumnos extends AppCompatActivity {
             public void onClick(View view) {
                 MyDialog.showCustomInputDialog(Alumnos.this, "Ingresar", R.layout.dialog__form_alumno, new MyDialog.AlumnoIngreso() {
                     @Override
-                    public void registroAlumno(String textoNombre, String textoApellido) {
+                    public void registroAlumno(String textoNombre, String textoApellido, List<ModeloClase> selectedClasses) {
                         alumno.setNombre(textoNombre);
                         alumno.setApellido(textoApellido);
 
-                        long resultId = dBhelper.insertarAlumno(alumno);
-                        if (resultId == -1) {
-                            Toast.makeText(Alumnos.this, "Ha habido un error", Toast.LENGTH_SHORT).show();
+                        List<Long> resultId = dBhelper.insertarAlumno(alumno, selectedClasses);
+                        if (resultId.get(0) == -1 || resultId.get(1) == -1) {
+                            Toast.makeText(Alumnos.this, "Ha habido un error al registrar el alumnos", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(Alumnos.this, "Se ha registrado un alumno", Toast.LENGTH_SHORT).show();
                             alumnosAdapter = new alumnosAdapter(Alumnos.this, R.layout.alumno_row, dBhelper.buscarAlumnos());
@@ -76,7 +79,7 @@ public class Alumnos extends AppCompatActivity {
                                     tutor.setDni(dni);
                                     tutor.setTelefono(nro_telefono);
                                     tutor.setDomicilio(domicilio);
-                                    tutor.setId_hijo(resultId);
+                                    tutor.setId_hijo(resultId.get(0));
 
                                     long resultadoTutorId = dBhelper.insertarTutor(tutor);
 

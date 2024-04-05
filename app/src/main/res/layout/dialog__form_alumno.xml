@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -17,7 +18,7 @@
         />
 
     <EditText
-        android:id="@+id/dialog_form_tutor__input_nombre"
+        android:id="@+id/dialog_form_alumno__input_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_form_alumno__label_nombre"
@@ -34,7 +35,7 @@
         android:id="@+id/dialog_form_alumno__label_apellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_form_tutor__input_nombre"
+        android:layout_below="@id/dialog_form_alumno__input_nombre"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:text="Apellido:"
@@ -55,5 +56,15 @@
         android:textSize="17dp"
         android:inputType="text"
         android:background="@drawable/text_field"/>
+
+    <ListView
+        android:id="@+id/dialog_form_alumno__list_clases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_form_alumno__input_apellido"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:choiceMode="multipleChoice"
+        />
 
 </RelativeLayout>
