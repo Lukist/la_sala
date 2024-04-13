@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/dialog_form_pago__tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Registrar pago"
+        android:textColor="@color/texto"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/dialog_form_pago__label_monto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/dialog_form_pago__tv_titulo"
+        android:text="Monto a pagar"
+        android:textColor="@color/texto"
+        android:textSize="20dp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_form_pago__input_monto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_form_pago__label_monto"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/texto"
+        android:textSize="17dp"
+        android:inputType="text"
+        android:background="@drawable/text_field"/>
+
+    <ListView
+        android:id="@+id/dialog_form_pago__lv_clases"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/dialog_form_pago__input_monto"/>
+
+    <TextView
+        android:id="@+id/dialog_form_pago__label_pregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@id/dialog_form_pago__lv_clases"
+        android:text="¿El cliente realizo el pago?"
+        android:textColor="@color/texto"
+        android:textSize="20dp"
+        />
+
+</RelativeLayout>

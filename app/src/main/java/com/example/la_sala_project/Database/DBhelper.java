@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.la_sala_project.modelos.ModeloAlumno;
 import com.example.la_sala_project.modelos.ModeloClase;
+import com.example.la_sala_project.modelos.ModeloDeuda;
+import com.example.la_sala_project.modelos.ModeloPaga;
+import com.example.la_sala_project.modelos.ModeloPagoDeuda;
 import com.example.la_sala_project.modelos.ModeloTutor;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -192,4 +195,79 @@ public class DBhelper extends SQLiteAssetHelper {
         db.close();
         return returnList;
     }
+
+    public long insertarDeudda(ModeloDeuda deuda) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("id_tutor", deuda.getId_tutor());
+        cv.put("id_hijo", deuda.getId_hijo());
+        cv.put("fecha_deuda", deuda.getFecha_deuda());
+        cv.put("hora_deuda", deuda.getHora_deuda());
+        cv.put("monto_debido", deuda.getMonto_debido());
+        cv.put("monto_debido_pagado", deuda.getMonto_debido_pagado());
+        cv.put("deuda_cumplida_sn", deuda.getDeuda_cumplida_sn() ? 1 : 0);
+
+        return db.insert("deudores_table", null, cv);
+    }
+
+    public List<ModeloDeuda> buscarDeudas(long id_alumno) {
+        List<ModeloDeuda> returnList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT DISTINCT * FROM deudores_table WHERE id_hijo = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id_alumno)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                long id_deuda = cursor.getLong(0);
+                long id_tutor = cursor.getLong(1);
+                long id_hijo = cursor.getLong(2);
+                String fecha_deuda = cursor.getString(3);
+                String hora_deuda = cursor.getString(4);
+                double monto_debido = cursor.getDouble(5);
+                double monto_debido_pagado = cursor.getDouble(6);
+                int deuda_cumplida_sn = cursor.getInt(7);
+
+                ModeloDeuda deuda = new ModeloDeuda(id_deuda, id_tutor, id_hijo, fecha_deuda, hora_deuda, monto_debido, monto_debido_pagado, deuda_cumplida_sn == 1);
+                returnList.add(deuda);
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public long insertarPago(ModeloPaga paga) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("id_tutor", paga.getId_tutor());
+        cv.put("id_hijo", paga.getId_hijo());
+        cv.put("fecha_pago", paga.getFecha_pago());
+        cv.put("hora_pago", paga.getHora_pago());
+        cv.put("monto_pagado", paga.getMonto_pagado());
+
+        return db.insert("recibo_table", null, cv);
+    }
+
+    public long insertarPagoDeuda(ModeloPagoDeuda pagoDeuda) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("id_pago", pagoDeuda.getId_pago());
+        cv.put("id_deuda", pagoDeuda.getId_deuda());
+        cv.put("monto", pagoDeuda.getMonto());
+
+        return db.insert("pago_deuda", null, cv);
+    }
+
+
 }
