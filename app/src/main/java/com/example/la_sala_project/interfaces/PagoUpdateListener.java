@@ -1,5 +1,5 @@
 package com.example.la_sala_project.interfaces;
 
 public interface PagoUpdateListener {
-    void updatePago(double monto);
+    void updatePago(double monto, int cantidadMeses,int position);
 }

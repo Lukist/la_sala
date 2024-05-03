@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         titulo = findViewById(R.id.Main_Relative__Textview_Bienvenido);
         subtitulo = findViewById(R.id.Main_Relative__subtitulo);
-        btn_pagos = findViewById(R.id.Main_Relative__button_pagar);
         btn_deudas = findViewById(R.id.Main_Relative__button_deudores);
         btn_alumnos = findViewById(R.id.Main_Relative__button_alumnos);
         btn_clases = findViewById(R.id.Main_Relative__button_clases);

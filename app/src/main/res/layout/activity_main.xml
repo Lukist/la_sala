@@ -69,32 +69,17 @@
                 android:textColor="@color/black"/>
 
 
-            <Button
-                android:id="@+id/Main_Relative__button_pagar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Main_Relative__imageview_divisor"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="69dp"
-                android:layout_marginTop="35dp"
-                android:backgroundTint="#DEFCFA"
-                android:text="PAGAR"
-                android:textColor="#2F2E41"
-                android:textSize="20dp"
-                android:paddingHorizontal="60dp"
-                android:paddingVertical="5dp"
-                />
 
             <Button
                 android:id="@+id/Main_Relative__button_deudores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Main_Relative__button_pagar"
+                android:layout_below="@id/Main_Relative__imageview_divisor"
                 android:layout_marginRight="69dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="#DEFCFA"
-                android:text="DEUDORES"
+                android:text="PAGOS"
                 android:textColor="#2F2E41"
                 android:textSize="20dp"
                 android:paddingHorizontal="60dp"

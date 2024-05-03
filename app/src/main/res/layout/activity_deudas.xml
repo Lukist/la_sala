@@ -38,29 +38,23 @@
                 android:layout_marginTop="-80dp"
                 android:layout_marginLeft="27dp"/>
 
-            <ListView
-                android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@id/activity_deudas__logo"
-                android:layout_marginTop="30dp"/>
 
         </RelativeLayout>
+
+        <com.example.la_sala_project.utils.NonScrollListView
+            android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@id/activity_deudas__rl_header"
+            android:layout_marginTop="-500dp"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_deudas__rl_header"
-            android:layout_marginTop="-200dp"
+            android:layout_below="@id/activity_deudas__lv_lista_alumnos_dia"
+            android:layout_marginTop="50dp"
             >
 
-            <ImageView
-                android:id="@+id/activity_deudas__iv_blob_deudores"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/blob_deuda_divider"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="12dp"/>
 
             <ImageView
                 android:id="@+id/activity_deudas__iv_deudores_divider"
@@ -81,11 +75,13 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"/>
 
-            <ListView
+            <com.example.la_sala_project.utils.NonScrollListView
+                android:id="@+id/activity_deudas__lv_lista_deudores"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_below="@id/activity_deudas__tv_subtitulo"
-                android:layout_marginTop="31dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"/>
         </RelativeLayout>
     </RelativeLayout>
 

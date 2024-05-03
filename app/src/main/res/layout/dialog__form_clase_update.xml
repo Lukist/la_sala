@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_form_clase_update__label_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Nombre clase:"
+        android:textColor="@color/texto"
+        android:textSize="20dp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_form_clase_update__input_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_form_clase_update__label_nombre"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/texto"
+        android:textSize="17dp"
+        android:inputType="text"
+        android:background="@drawable/text_field"/>
+
+    <TextView
+        android:id="@+id/dialog_form_clase_update__label_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_form_clase_update__input_nombre"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Precio:"
+        android:textColor="@color/texto"
+        android:textSize="20dp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_form_clase_update__input_precio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_form_clase_update__label_precio"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/texto"
+        android:textSize="17dp"
+        android:inputType="numberDecimal"
+        android:background="@drawable/text_field"
+        />
+
+</RelativeLayout>

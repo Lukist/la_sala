@@ -61,10 +61,12 @@ public class ClasesMesesAdapter extends ArrayAdapter<ModeloClase> {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                String mesesSeleccionados = (String) parent.getItemAtPosition(position);
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                String mesesSeleccionados = (String) parent.getItemAtPosition(i);
+                cantidad_meses_pagar.setText(mesesSeleccionados);
 
-                listener.updatePago(Double.parseDouble(mesesSeleccionados));
+                double pagoFinalClase = clase.getPrecio() * Double.parseDouble(mesesSeleccionados);
+                listener.updatePago(pagoFinalClase, Integer.parseInt(mesesSeleccionados), position);
             }
 
             @Override

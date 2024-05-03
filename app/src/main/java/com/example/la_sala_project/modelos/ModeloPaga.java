@@ -4,6 +4,7 @@ public class ModeloPaga {
     long id_recibo;
     long id_tutor;
     long id_hijo;
+    long id_clase;
     String fecha_pago;
     String hora_pago;
     double monto_pagado;
@@ -11,10 +12,11 @@ public class ModeloPaga {
     public ModeloPaga() {
     }
 
-    public ModeloPaga(long id_recibo, long id_tutor, long id_hijo, String fecha_pago, String hora_pago, double monto_pagado) {
+    public ModeloPaga(long id_recibo, long id_tutor, long id_hijo, long id_clase, String fecha_pago, String hora_pago, double monto_pagado) {
         this.id_recibo = id_recibo;
         this.id_tutor = id_tutor;
         this.id_hijo = id_hijo;
+        this.id_clase = id_clase;
         this.fecha_pago = fecha_pago;
         this.hora_pago = hora_pago;
         this.monto_pagado = monto_pagado;
@@ -42,6 +44,14 @@ public class ModeloPaga {
 
     public void setId_hijo(long id_hijo) {
         this.id_hijo = id_hijo;
+    }
+
+    public long getId_clase() {
+        return id_clase;
+    }
+
+    public void setId_clase(long id_clase) {
+        this.id_clase = id_clase;
     }
 
     public String getFecha_pago() {

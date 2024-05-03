@@ -1,24 +1,24 @@
 package com.example.la_sala_project.modelos;
 
 public class ModeloAlumno {
-    int idAlumno;
+    long idAlumno;
     String nombre;
     String apellido;
 
     public ModeloAlumno() {
     }
 
-    public ModeloAlumno(int idAlumno, String nombre, String apellido) {
+    public ModeloAlumno(long idAlumno, String nombre, String apellido) {
         this.idAlumno = idAlumno;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public int getIdAlumno() {
+    public long getIdAlumno() {
         return idAlumno;
     }
 
-    public void setIdAlumno(int idAlumno) {
+    public void setIdAlumno(long idAlumno) {
         this.idAlumno = idAlumno;
     }
 

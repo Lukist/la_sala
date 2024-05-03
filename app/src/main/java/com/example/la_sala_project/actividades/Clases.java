@@ -1,10 +1,14 @@
 package com.example.la_sala_project.actividades;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -44,7 +48,7 @@ public class Clases extends AppCompatActivity {
         crearClase.setTypeface(typeface);
         subtituloDivider.setTypeface(typeface);
 
-        clasesAdapter = new ClasesAdapter(Clases.this, R.layout.alumno_row, dBhelper.buscarClases());
+        clasesAdapter = new ClasesAdapter(Clases.this, R.layout.alumno_row, dBhelper,dBhelper.buscarClases());
         lv_clases.setAdapter(clasesAdapter);
 
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +68,7 @@ public class Clases extends AppCompatActivity {
                         } else {
                             Toast.makeText(Clases.this, "Se creo la clase con exito", Toast.LENGTH_SHORT).show();
 
-                            clasesAdapter = new ClasesAdapter(Clases.this, R.layout.alumno_row, dBhelper.buscarClases());
+                            clasesAdapter = new ClasesAdapter(Clases.this, R.layout.alumno_row, dBhelper,dBhelper.buscarClases());
                             lv_clases.setAdapter(clasesAdapter);
 
                             nombreInput.setText("");
@@ -79,5 +83,57 @@ public class Clases extends AppCompatActivity {
 
             }
         });
+
+        lv_clases.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ModeloClase clase = (ModeloClase) adapterView.getItemAtPosition(i);
+
+                dialogUpdate(clase, dBhelper);
+            }
+        });
+    }
+
+    private void dialogUpdate(ModeloClase clase, DBhelper db) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this ,R.style.WhiteDialog);
+
+        View dialogLayout = LayoutInflater.from(this).inflate(R.layout.dialog__form_clase_update, null);
+        final EditText inputNombre = dialogLayout.findViewById(R.id.dialog_form_clase_update__input_nombre);
+        final EditText inputPrecio = dialogLayout.findViewById(R.id.dialog_form_clase_update__input_precio);
+
+        inputNombre.setText(clase.getNombre_clase());
+        inputPrecio.setText(String.valueOf(clase.getPrecio()));
+
+        builder.setView(dialogLayout);
+
+        builder.setPositiveButton("Cambiar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                try {
+                    String valorNombre = inputNombre.getText().toString().trim();
+                    double valorPrecio = Double.parseDouble(inputPrecio.getText().toString().trim());
+
+                    clase.setNombre_clase(valorNombre);
+                    clase.setPrecio(valorPrecio);
+                    db.updateClase(clase);
+
+                    clasesAdapter = new ClasesAdapter(Clases.this, R.layout.alumno_row, dBhelper,dBhelper.buscarClases());
+                    lv_clases.setAdapter(clasesAdapter);
+                }catch (Exception e) {
+                    Toast.makeText(Clases.this, "Por favor ingreses valores validos", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.show();
     }
 }

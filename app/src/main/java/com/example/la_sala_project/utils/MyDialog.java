@@ -18,33 +18,75 @@ import com.example.la_sala_project.R;
 import com.example.la_sala_project.adaptadores.ClasesBuilderAdapter;
 import com.example.la_sala_project.adaptadores.ClasesMesesAdapter;
 import com.example.la_sala_project.interfaces.PagoUpdateListener;
+import com.example.la_sala_project.modelos.ModeloAlumno;
 import com.example.la_sala_project.modelos.ModeloClase;
+import com.example.la_sala_project.modelos.ModeloDeuda;
+import com.example.la_sala_project.modelos.ModeloPaga;
+import com.example.la_sala_project.modelos.ModeloTutor;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-
+/***
+ *
+ * Esta clase maneja varios dialog builder complejos que tratan con carga de datos a una lista y tambien con interacciones con la base
+ * de datos al mismo tiempo
+ *
+ * @author Lucas Palacios
+ *
+ */
 
 public class MyDialog {
 
+    /***
+     *
+     * Declaramos la variable de la base de datos
+     *
+     */
     static DBhelper db;
 
 
+    /***
+     *
+     * Declaramos las interfaces
+     *
+     */
+
+    /***
+     *
+     * La interface que manejara los inputs con el nombre y el apellodo del alumno
+     *
+     */
     public interface AlumnoIngreso {
         void registroAlumno(String textoNombre, String textoApellido, List<ModeloClase> selectedClasses);
 
     }
 
+    /***
+     * La interface que maneja los datos del tutor
+     */
     public interface TutorIngreso {
         void registroTutor(String nombre, String apellido, String correo, String dni, String nro_telefono, String domicilio);
     }
 
+    /***
+     *La interfaz que maneja la cantidad de dinero pagada al registrar la clase
+     */
     public interface  PagoIngreso {
-        void registroPago(double cantidadPagada);
+        void registroPago(long exito);
     }
 
-
-    public static void showCustomInputDialog(Context context, String title, int layoutResId, final AlumnoIngreso listener) {
+    /***
+     * Metodo que llama al primer dialog builder para el registro de nombre, apellidos, y clases elegidas para inscribirse
+     *
+     * @param context El contexto en cual se llama al metodo
+     * @param layoutResId El layout del dialog del dialog que usaremos
+     * @param listener  Instancia de la interfaz para enviar los datos del alumno
+     */
+    public static void showCustomInputDialog(Context context,  int layoutResId, final AlumnoIngreso listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.WhiteDialog);
         db = new DBhelper(context);
 
@@ -87,6 +129,12 @@ public class MyDialog {
 
         builder.show();
     }
+
+    /***
+     * Dialog builder encargado de manejar los datos del tutor
+     * @param context contexto desde el cual se llama al metodo
+     * @param listener instancia de la interfaz de los datos del tutor
+     */
 
     public static void showAnotherDialog(Context context, final TutorIngreso listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.WhiteDialog);
@@ -136,7 +184,25 @@ public class MyDialog {
         dialog.show();
     }
 
-    public static void pagoDialog(Context context, double deudaAlumnoNuevo, List<ModeloClase> clasesElegidas, final PagoIngreso listener) {
+    /***
+     * Diallog buider encargado de registrar la deuda del alumno segun la cantidad de meses seleccionadas para las clases
+     *
+     * @param context
+     * @param deudaAlumnoNuevo
+     * @param clasesElegidas
+     * @param listener
+     */
+
+    public static void pagoDialog(Context context, double deudaAlumnoNuevo, List<ModeloClase> clasesElegidas, long id_alumno, List<ModeloDeuda> listaDeudas, final PagoIngreso listener) {
+        double[] carritoDeClases = new double[clasesElegidas.size()];
+        int[] mesesPorClase = new int[clasesElegidas.size()];
+        final double[] sumatoria = {0};
+
+        for (int i = 0; i < clasesElegidas.size(); i++) {
+            carritoDeClases[i] = clasesElegidas.get(i).getPrecio();
+            mesesPorClase[i] = 1;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.WhiteDialog);
 
         View dialogLayout = LayoutInflater.from(context).inflate(R.layout.dialog__form_pago, null);
@@ -145,9 +211,19 @@ public class MyDialog {
 
         ClasesMesesAdapter clasesMesesAdapter = new ClasesMesesAdapter(context, R.layout.list_item_clase_mes, clasesElegidas, new PagoUpdateListener() {
             @Override
-            public void updatePago(double monto) {
+            public void updatePago(double monto, int mesesSeleccionados,int position) {
+
                 // Update the TextView here
-                pagoEfectuado.setText(String.valueOf(monto));
+                carritoDeClases[position] = monto;
+                mesesPorClase[position] = mesesSeleccionados;
+
+                sumatoria[0] = 0;
+
+                for (double num : carritoDeClases) {
+                    sumatoria[0] += num;
+                }
+
+                pagoEfectuado.setText(String.valueOf(sumatoria[0]));
             }
         });
 
@@ -162,13 +238,25 @@ public class MyDialog {
         builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                double monto = Double.parseDouble(pagoEfectuado.getText().toString().trim());
+
+                for (int j = 0; j < clasesElegidas.size(); j++) {
+                    double precioDePago = carritoDeClases[j] / mesesPorClase[j];
+
+                    for (int h = 0; h < mesesPorClase[j]; h++) {
+                        ModeloClase clase = clasesElegidas.get(j);
+                        ModeloPaga pago = new ModeloPaga(0, db.buscarTutorNombre(id_alumno).getId_tutor(), id_alumno, clase.getId_clase(), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), precioDePago);
+
+                        long exito = db.insertarRecibo(pago);
+
+                        if (h == 0) {
+                            listaDeudas.get(j).setMonto_debido_pagado(precioDePago);
+                            listaDeudas.get(j).setDeuda_cumplida_sn(true);
+                        }
 
 
-
-                if (listener != null) {
-                    listener.registroPago(monto);
+                    }
                 }
+
             }
         });
 

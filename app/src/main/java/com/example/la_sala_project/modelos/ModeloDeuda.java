@@ -4,6 +4,7 @@ public class ModeloDeuda {
     long id_deuda;
     long id_tutor;
     long id_hijo;
+    long id_clase;
     String fecha_deuda;
     String hora_deuda;
     double monto_debido;
@@ -13,10 +14,11 @@ public class ModeloDeuda {
     public ModeloDeuda() {
     }
 
-    public ModeloDeuda(long id_deuda, long id_tutor, long id_hijo, String fecha_deuda, String hora_deuda, double monto_debido, double monto_debido_pagado, Boolean deuda_cumplida_sn) {
+    public ModeloDeuda(long id_deuda, long id_tutor, long id_hijo, long id_clase, String fecha_deuda, String hora_deuda, double monto_debido, double monto_debido_pagado, Boolean deuda_cumplida_sn) {
         this.id_deuda = id_deuda;
         this.id_tutor = id_tutor;
         this.id_hijo = id_hijo;
+        this.id_clase = id_clase;
         this.fecha_deuda = fecha_deuda;
         this.hora_deuda = hora_deuda;
         this.monto_debido = monto_debido;
@@ -46,6 +48,14 @@ public class ModeloDeuda {
 
     public void setId_hijo(long id_hijo) {
         this.id_hijo = id_hijo;
+    }
+
+    public long getId_clase() {
+        return id_clase;
+    }
+
+    public void setId_clase(long id_clase) {
+        this.id_clase = id_clase;
     }
 
     public String getFecha_deuda() {
