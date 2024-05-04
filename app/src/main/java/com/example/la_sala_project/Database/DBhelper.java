@@ -252,6 +252,8 @@ public class DBhelper extends SQLiteAssetHelper {
 
         cv.put("id_tutor", paga.getId_tutor());
         cv.put("id_hijo", paga.getId_hijo());
+        cv.put("id_clase", paga.getId_clase());
+        cv.put("id_deuda", paga.getId_deuda());
         cv.put("fecha_pago", paga.getFecha_pago());
         cv.put("hora_pago", paga.getHora_pago());
         cv.put("monto_pagado", paga.getMonto_pagado());
@@ -330,6 +332,7 @@ public class DBhelper extends SQLiteAssetHelper {
         cv.put("id_tutor", pago.getId_tutor());
         cv.put("id_hijo", pago.getId_hijo());
         cv.put("id_clase", pago.getId_clase());
+        cv.put("id_deuda", pago.getId_deuda());
         cv.put("fecha_pago", pago.getFecha_pago());
         cv.put("hora_pago", pago.getHora_pago());
         cv.put("monto_pagado", pago.getMonto_pagado());
@@ -356,6 +359,22 @@ public class DBhelper extends SQLiteAssetHelper {
         db.update("clases", cv, whereClause, whereArgs);
 
         db.close();
+    }
+
+    public void updateDeuda(ModeloDeuda deuda) {
+        SQLiteDatabase db =  getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("monto_debido_pagado", deuda.getMonto_debido_pagado());
+        cv.put("deuda_cumplida_sn", deuda.getDeuda_cumplida_sn());
+
+        String whereClause = "id_deuda = ?";
+        String[] whereArgs = { String.valueOf(deuda.getId_deuda()) };
+
+        db.update("deudores_table", cv, whereClause, whereArgs);
+
+
     }
 
 

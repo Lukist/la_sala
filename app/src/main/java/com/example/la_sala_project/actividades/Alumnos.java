@@ -126,6 +126,7 @@ public class Alumnos extends AppCompatActivity {
 
                         Toast.makeText(Alumnos.this, "Se ha registrado un alumno", Toast.LENGTH_SHORT).show();
                         alumnosAdapter = new alumnosAdapter(Alumnos.this, R.layout.alumno_row, dBhelper,dBhelper.buscarAlumnos());
+                        lv_alumnos.setAdapter(alumnosAdapter);
 
 
                         MyDialog.showAnotherDialog(Alumnos.this, new MyDialog.TutorIngreso() {
@@ -156,6 +157,8 @@ public class Alumnos extends AppCompatActivity {
                                             ModeloDeuda deuda = new ModeloDeuda(0, resultadoTutorId, resultId.get(0), clase.getId_clase(),new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), clase.getPrecio(), 0, false);
 
                                             long exitoDeuda = dBhelper.insertarDeudda(deuda);
+
+                                            deuda.setId_deuda(exitoDeuda);
 
                                             if (exitoDeuda != -1) {
                                                 Toast.makeText(Alumnos.this, "deuda creada", Toast.LENGTH_SHORT).show();

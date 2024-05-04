@@ -74,7 +74,8 @@
                 android:paddingLeft="35dp"
                 android:drawableLeft="@drawable/baseline_music_note_24"
                 android:drawablePadding="15dp"
-                android:drawableTint="#7B8794"/>
+                android:drawableTint="#7B8794"
+                android:inputType="text"/>
 
             <EditText
                 android:id="@+id/activity_clases__et_input_precio"
@@ -93,7 +94,8 @@
                 android:paddingLeft="35dp"
                 android:drawableLeft="@drawable/baseline_attach_money_24"
                 android:drawablePadding="15dp"
-                android:drawableTint="#7B8794"/>
+                android:drawableTint="#7B8794"
+                android:inputType="numberDecimal"/>
 
             <Button
                 android:id="@+id/activity_clases__btn_ingresar"

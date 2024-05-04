@@ -26,6 +26,7 @@ import com.example.la_sala_project.modelos.ModeloTutor;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -242,18 +243,36 @@ public class MyDialog {
                 for (int j = 0; j < clasesElegidas.size(); j++) {
                     double precioDePago = carritoDeClases[j] / mesesPorClase[j];
 
+                    int contador = 0;
                     for (int h = 0; h < mesesPorClase[j]; h++) {
                         ModeloClase clase = clasesElegidas.get(j);
-                        ModeloPaga pago = new ModeloPaga(0, db.buscarTutorNombre(id_alumno).getId_tutor(), id_alumno, clase.getId_clase(), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), precioDePago);
 
-                        long exito = db.insertarRecibo(pago);
 
                         if (h == 0) {
                             listaDeudas.get(j).setMonto_debido_pagado(precioDePago);
                             listaDeudas.get(j).setDeuda_cumplida_sn(true);
+
+                            db.updateDeuda(listaDeudas.get(j));
+
+                            ModeloPaga pago = new ModeloPaga(0, db.buscarTutorNombre(id_alumno).getId_tutor(), id_alumno, clase.getId_clase(), listaDeudas.get(j).getId_deuda() ,new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), precioDePago);
+
+                            long exito = db.insertarRecibo(pago);
+                        } else {
+                            Calendar calendar = Calendar.getInstance();
+
+                            calendar.add(Calendar.MONTH, contador);
+                            Date newDate = calendar.getTime();
+                            String formattedNewDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(newDate);
+                            ModeloDeuda deudaDePagoAdelantado = new ModeloDeuda(0, db.buscarTutorNombre(id_alumno).getId_tutor(), id_alumno, clase.getId_clase(),formattedNewDate, new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), clase.getPrecio(), precioDePago, true);
+                            long idDeudaAdelanto = db.insertarDeudda(deudaDePagoAdelantado);
+
+                            if (idDeudaAdelanto != -1) {
+                                ModeloPaga pagoAdelantaddo = new ModeloPaga(0, db.buscarTutorNombre(id_alumno).getId_tutor(), id_alumno, clase.getId_clase(), idDeudaAdelanto ,new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()) , new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()), precioDePago);
+                                db.insertarPago(pagoAdelantaddo);
+                            }
                         }
 
-
+                        contador++;
                     }
                 }
 
