@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actividades.AlumnoInfo"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/activity_alumno_info__header"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/rosaPrincipal"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:id="@+id/activity_alumno_info__logo"
+                android:layout_width="match_parent"
+                android:layout_height="124dp"
+                android:src="@drawable/alumno_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/activity_alumno_info__logo"
+                android:layout_centerHorizontal="true"
+                android:text="Nombre Alumno"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_alumno_info__header"
+            >
+
+            <TextView
+                android:id="@+id/activity_alumno_info__tutor_subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Tutor"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__tutor_subtitulo"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="Nombre"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_nombre"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_apellido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_nombre"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Apellido"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_apellido"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_apellido"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Correo"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_correo"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_dni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_correo"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="DNI"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_dni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_dni"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_dni"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Telefono"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_telefono"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+            <TextView
+                android:id="@+id/activity_alumno_info__label_domicilio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_telefono"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Domicilio"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/texto"/>
+
+            <EditText
+                android:id="@+id/activity_alumno_info__input_domicilio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__label_domicilio"
+                android:background="@drawable/text_field"
+                android:layout_marginRight="180dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="@color/texto"
+
+                />
+
+
+            <Button
+                android:id="@+id/activity_alumno_info__btn_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_alumno_info__input_domicilio"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="40dp"
+                android:text="Cancelar"
+                android:textColor="@color/texto"
+                android:backgroundTint="@color/white"/>
+
+            <Button
+                android:id="@+id/activity_alumno_info__btn_cambiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/activity_alumno_info__btn_cancelar"
+                android:layout_below="@id/activity_alumno_info__input_domicilio"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="35dp"
+                android:text="Cambiar"
+                android:textColor="@color/texto"
+                android:backgroundTint="@color/rosaSecundario"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+</ScrollView>

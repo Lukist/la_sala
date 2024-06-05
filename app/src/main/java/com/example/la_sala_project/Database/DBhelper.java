@@ -377,7 +377,27 @@ public class DBhelper extends SQLiteAssetHelper {
 
     }
 
+    public List<Long> buscarClase_hijo(long id_hijo) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Long> returnList = new ArrayList<>();
 
+        String query = "SELECT * FROM clases_hijo WHERE id_hijo = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id_hijo)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                long id_clase = cursor.getLong(2);
+
+                returnList.add(id_clase);
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
 
 
 }
