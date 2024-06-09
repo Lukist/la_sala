@@ -381,6 +381,7 @@ public class DBhelper extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<Long> returnList = new ArrayList<>();
 
+
         String query = "SELECT * FROM clases_hijo WHERE id_hijo = ?";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id_hijo)});
@@ -398,6 +399,48 @@ public class DBhelper extends SQLiteAssetHelper {
 
         return returnList;
     }
+
+    public List<ModeloDeuda> traerListaDeUltimasDeudas() {
+
+        List<ModeloDeuda> listaReturn = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT d1.* " +
+                "FROM deudores_table d1 " +
+                "JOIN ( " +
+                "    SELECT id_hijo, id_clase, MAX(fecha_deuda || ' ' || hora_deuda) as max_fecha_hora " +
+                "    FROM deudores_table " +
+                "    GROUP BY id_hijo, id_clase " +
+                ") d2 " +
+                "ON d1.id_hijo = d2.id_hijo " +
+                "AND d1.id_clase = d2.id_clase " +
+                "AND (d1.fecha_deuda || ' ' || d1.hora_deuda) = d2.max_fecha_hora";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Read data from cursor
+                int idDeuda = cursor.getInt(0);
+                int idTutor = cursor.getInt(1);
+                int idHijo = cursor.getInt(2);
+                int idClase = cursor.getInt(3);
+                String fechaDeuda = cursor.getString(4);
+                String horaDeuda = cursor.getString(5);
+                double montoDebido = cursor.getDouble(6);
+                double montoDebidoPagado = cursor.getDouble(7);
+                int deudaCumplidaSn = cursor.getInt(8);
+
+                ModeloDeuda deudaReturn = new ModeloDeuda(idDeuda, idTutor, idHijo, idClase, fechaDeuda, horaDeuda, montoDebido, montoDebidoPagado, deudaCumplidaSn == 1);
+                listaReturn.add(deudaReturn);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listaReturn;
+    }
+
+
 
 
 }
