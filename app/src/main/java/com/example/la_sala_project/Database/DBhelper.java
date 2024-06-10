@@ -441,6 +441,54 @@ public class DBhelper extends SQLiteAssetHelper {
     }
 
 
+    public double buscarClasePrecio(int id_clase) {
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        double precio = 0;
+
+        String query = "SELECT DISTINCT precio FROM clases WHERE id_clase = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id_clase)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            precio = cursor.getDouble(0);
+        }
+
+        return precio;
+    }
+
+    public List<ModeloPaga> buscarPagos() {
+        List<ModeloPaga> listaReturn = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT DISTINCT * FROM recibo_table ORDER BY id_recibo";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                long id_recibo = cursor.getLong(0);
+                long id_tutor = cursor.getLong(1);
+                long id_hijo = cursor.getLong(2);
+                long id_clase = cursor.getLong(3);
+                long id_deuda = cursor.getLong(4);
+                String fecha_pago = cursor.getString(5);
+                String hora_pago = cursor.getString(6);
+                double monto_pagado = cursor.getDouble(7);
+
+                ModeloPaga paga = new ModeloPaga(id_recibo, id_tutor, id_hijo, id_clase, id_deuda, fecha_pago, hora_pago, monto_pagado);
+                listaReturn.add(paga);
+
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listaReturn;
+    }
+
+
 
 
 }

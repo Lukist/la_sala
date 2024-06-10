@@ -13,11 +13,13 @@
         android:layout_height="wrap_content"
         >
 
+
         <RelativeLayout
             android:id="@+id/activity_deudas__rl_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/deudores_back">
+            android:background="@drawable/deudores_back"
+            >
 
             <ImageView
                 android:id="@+id/activity_deudas__logo"
@@ -41,12 +43,24 @@
 
         </RelativeLayout>
 
+        <ImageButton
+            android:id="@+id/activity_deudas__imgbtn_visibilidadPagos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_deudas__rl_header"
+            android:src="@drawable/baseline_remove_red_eye_24"
+            android:backgroundTint="@color/rosaSecundario"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="-500dp"
+            />
+
         <com.example.la_sala_project.utils.NonScrollListView
             android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_below="@id/activity_deudas__rl_header"
-            android:layout_marginTop="-500dp"/>
+            android:layout_below="@id/activity_deudas__imgbtn_visibilidadPagos"
+            android:layout_marginTop="50dp"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -75,11 +89,23 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"/>
 
+            <ImageButton
+                android:id="@+id/activity_deudas__imgbtn_visibilidadDeudas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_deudas__tv_subtitulo"
+                android:src="@drawable/baseline_remove_red_eye_24"
+                android:backgroundTint="@color/rosaSecundario"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="35dp"
+                android:layout_marginTop="10dp"
+                />
+
             <com.example.la_sala_project.utils.NonScrollListView
                 android:id="@+id/activity_deudas__lv_lista_deudores"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_below="@id/activity_deudas__tv_subtitulo"
+                android:layout_below="@id/activity_deudas__imgbtn_visibilidadDeudas"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="50dp"/>
         </RelativeLayout>

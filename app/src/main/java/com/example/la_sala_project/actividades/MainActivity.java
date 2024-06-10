@@ -53,15 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DBhelper(MainActivity.this);
 
-        List<ModeloDeuda> listaDeUltimasDeudas = new ArrayList<>();
-
-        listaDeUltimasDeudas = db.traerListaDeUltimasDeudas();
-
-        for (ModeloDeuda deuda : listaDeUltimasDeudas) {
-            detectorDeDeudas(deuda.getFecha_deuda());
-        }
-
-
         btn_deudas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

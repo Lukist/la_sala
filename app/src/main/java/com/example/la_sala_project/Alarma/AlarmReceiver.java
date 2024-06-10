@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -27,14 +28,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         listaDeUltimasDeudas = dBhelper.traerListaDeUltimasDeudas();
 
         for (ModeloDeuda deuda : listaDeUltimasDeudas) {
-            detectorDeDeudas(deuda.getFecha_deuda());
+            detectorDeDeudas(deuda);
         }
 
         // Create a notification channel (required for Android Oreo and above)
 
     }
 
-    private void detectorDeDeudas(String fecha) {
+    private void detectorDeDeudas(ModeloDeuda deuda) {
+
+        String fecha = deuda.getFecha_deuda();
 
         Log.d("Fecha", "funcion llamada con exito");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -61,6 +64,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         if (differenceDays >= 30) {
             Log.d("Fecha", "Se ha cumplido un mes desde la ultima deuda");
+
+            deuda.setFecha_deuda(new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+            deuda.setHora_deuda(new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
+            deuda.setMonto_debido_pagado(0);
+            deuda.setMonto_debido(dBhelper.buscarClasePrecio((int) deuda.getId_clase()));
+            deuda.setDeuda_cumplida_sn(false);
+
+            dBhelper.insertarDeudda(deuda);
+
         } else {
             Log.d("Fecha", "Aun no ha pasado un mes desde la ultima deuda");
         }
