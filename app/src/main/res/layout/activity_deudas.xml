@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,110 +9,175 @@
     >
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/deudores_back"/>
+
+
+    <TextView
+        android:id="@+id/activity_deudas__tv_tittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/activity_deudas__tv_subtitulo"
+        android:layout_marginTop="15dp"
+        android:text="Pagos"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:textColor="@color/black"
+        />
+
+    <ImageButton
+        android:id="@+id/activity_deudas__imgbtn_agregarPago"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_tittle"
+        app:layout_constraintEnd_toStartOf="@id/activity_deudas__imgbtn_visibilidadDeudas"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/rosaSecundario"/>
+
+
+    <ImageButton
+        android:id="@+id/activity_deudas__imgbtn_visibilidadPagos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_remove_red_eye_24"
+        android:backgroundTint="@color/rosaSecundario"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_tittle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/activity_deudas__inputContainer_buscadorPagos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_tittle"
+        app:layout_constraintEnd_toStartOf="@id/activity_deudas__imgbtn_agregarPago"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:boxStrokeColor="@color/gris_texto"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Buscar Pago"
+        android:textColorHint="@color/gris_texto"
         >
 
-
-        <RelativeLayout
-            android:id="@+id/activity_deudas__rl_header"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/activity_deudas__input_buscadorPagos"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/deudores_back"
-            >
-
-            <ImageView
-                android:id="@+id/activity_deudas__logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/deudas_logo"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"/>
-
-            <TextView
-                android:id="@+id/activity_deudas__tv_tittle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alumnos\nal dia"
-                android:textSize="30dp"
-                android:textColor="@color/texto"
-                android:layout_below="@id/activity_deudas__logo"
-                android:layout_marginTop="-80dp"
-                android:layout_marginLeft="27dp"/>
-
-
-        </RelativeLayout>
-
-        <ImageButton
-            android:id="@+id/activity_deudas__imgbtn_visibilidadPagos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_deudas__rl_header"
-            android:src="@drawable/baseline_remove_red_eye_24"
-            android:backgroundTint="@color/rosaSecundario"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="35dp"
-            android:layout_marginTop="-500dp"
+            android:textColor="@color/gris_texto"
+            android:inputType="text"
+            android:maxLength="20"
             />
 
-        <com.example.la_sala_project.utils.NonScrollListView
-            android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ListView
+        android:id="@+id/activity_deudas__lv_lista_alumnos_dia"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__inputContainer_buscadorPagos"
+        app:layout_constraintBottom_toTopOf="@id/activity_deudas__divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="15dp"/>
+
+
+
+    <View
+        android:id="@+id/activity_deudas__divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/activity_deudas__tv_subtitulo"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__divider"
+        app:layout_constraintStart_toStartOf="@id/activity_deudas__inputContainer_buscadorDeudas"
+        app:layout_constraintEnd_toEndOf="@id/activity_deudas__imgbtn_visibilidadDeudas"
+        android:layout_marginTop="15dp"
+        android:text="Deudas"
+        android:layout_marginBottom="15dp"
+        android:gravity="start"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/activity_deudas__inputContainer_buscadorDeudas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_subtitulo"
+        app:layout_constraintEnd_toStartOf="@id/activity_deudas__imgbtn_agregarDeuda"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:boxStrokeColor="@color/gris_texto"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Buscar Deuda"
+        android:textColorHint="@color/gris_texto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/activity_deudas__input_buscadorDeudas"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_below="@id/activity_deudas__imgbtn_visibilidadPagos"
-            android:layout_marginTop="50dp"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/activity_deudas__lv_lista_alumnos_dia"
-            android:layout_marginTop="50dp"
-            >
+            android:textColor="@color/gris_texto"
+            android:inputType="text"
+            android:maxLength="20"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/activity_deudas__imgbtn_agregarDeuda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_subtitulo"
+        app:layout_constraintEnd_toStartOf="@id/activity_deudas__imgbtn_visibilidadDeudas"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/rosaSecundario"/>
 
 
-            <ImageView
-                android:id="@+id/activity_deudas__iv_deudores_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/deuda_divider"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="27dp"/>
+    <ImageButton
+        android:id="@+id/activity_deudas__imgbtn_visibilidadDeudas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_remove_red_eye_24"
+        android:backgroundTint="@color/rosaSecundario"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__tv_subtitulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="25dp"
+        />
 
-            <TextView
-                android:id="@+id/activity_deudas__tv_subtitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alumnos en deuda"
-                android:textColor="@color/texto"
-                android:layout_below="@id/activity_deudas__iv_deudores_divider"
-                android:textSize="30dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"/>
-
-            <ImageButton
-                android:id="@+id/activity_deudas__imgbtn_visibilidadDeudas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_deudas__tv_subtitulo"
-                android:src="@drawable/baseline_remove_red_eye_24"
-                android:backgroundTint="@color/rosaSecundario"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="35dp"
-                android:layout_marginTop="10dp"
-                />
-
-            <com.example.la_sala_project.utils.NonScrollListView
-                android:id="@+id/activity_deudas__lv_lista_deudores"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@id/activity_deudas__imgbtn_visibilidadDeudas"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="50dp"/>
-        </RelativeLayout>
-    </RelativeLayout>
+    <ListView
+        android:id="@+id/activity_deudas__lv_lista_deudores"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/activity_deudas__inputContainer_buscadorDeudas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="15dp"/>
 
 
 
 
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

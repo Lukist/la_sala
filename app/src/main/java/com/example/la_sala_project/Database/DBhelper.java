@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.la_sala_project.modelos.ModeloAlumno;
 import com.example.la_sala_project.modelos.ModeloClase;
 import com.example.la_sala_project.modelos.ModeloDeuda;
+import com.example.la_sala_project.modelos.ModeloDeudaConNombre;
 import com.example.la_sala_project.modelos.ModeloPaga;
+import com.example.la_sala_project.modelos.ModeloPagaConNombre;
 import com.example.la_sala_project.modelos.ModeloPagoDeuda;
 import com.example.la_sala_project.modelos.ModeloTutor;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -458,12 +460,12 @@ public class DBhelper extends SQLiteAssetHelper {
         return precio;
     }
 
-    public List<ModeloPaga> buscarPagos() {
-        List<ModeloPaga> listaReturn = new ArrayList<>();
+    public List<ModeloPagaConNombre> buscarPagos() {
+        List<ModeloPagaConNombre> listaReturn = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
-        String query = "SELECT DISTINCT * FROM recibo_table ORDER BY id_recibo";
+        String query = "SELECT p.*, t.nombre, t.apellido FROM recibo_table p JOIN tutor_table t ON p.id_tutor = t.id_tutor ORDER BY id_recibo DESC;";
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -477,9 +479,12 @@ public class DBhelper extends SQLiteAssetHelper {
                 String fecha_pago = cursor.getString(5);
                 String hora_pago = cursor.getString(6);
                 double monto_pagado = cursor.getDouble(7);
+                String tutor_nombre = cursor.getString(8);
+                String tutor_apellido = cursor.getString(9);
 
                 ModeloPaga paga = new ModeloPaga(id_recibo, id_tutor, id_hijo, id_clase, id_deuda, fecha_pago, hora_pago, monto_pagado);
-                listaReturn.add(paga);
+                ModeloPagaConNombre pagaConNombre = new ModeloPagaConNombre(paga, tutor_nombre, tutor_apellido);
+                listaReturn.add(pagaConNombre);
 
             }while (cursor.moveToNext());
         }

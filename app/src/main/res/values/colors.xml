@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="texto">#323F4B</color>
+    <color name="gris_texto">#808080</color>
     <color name="rosaPrincipal">#FCDEE0</color>
     <color name="celestePrincipal">#DEFCFA</color>
     <color name="rosaSecundario">#F8AFB4</color>
