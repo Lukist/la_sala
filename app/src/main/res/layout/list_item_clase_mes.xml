@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:background="@color/white"
+    android:background="@color/tranparente"
     android:paddingHorizontal="15dp"
     android:paddingVertical="20dp">
 
@@ -16,14 +16,7 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         />
 
-    <TextView
-        android:id="@+id/list_item_clase_mes__tv_meses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/list_item_clase_mes__spinner_meses"
-        android:textAppearance="?android:attr/textAppearanceListItem"
-        android:text="1"
-        android:textColor="@color/texto"/>
+
 
     <Spinner
         android:id="@+id/list_item_clase_mes__spinner_meses"

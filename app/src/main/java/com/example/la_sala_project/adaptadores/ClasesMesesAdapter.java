@@ -1,6 +1,8 @@
 package com.example.la_sala_project.adaptadores;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,9 @@ import com.example.la_sala_project.modelos.ModeloClase;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClasesMesesAdapter extends ArrayAdapter<ModeloClase> {
 
@@ -27,6 +31,7 @@ public class ClasesMesesAdapter extends ArrayAdapter<ModeloClase> {
     private int resourceLayout;
 
     private String[] meses = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+    private Map<Integer, Integer> selectedMonthsMap = new HashMap<>(); // To store selected months
 
     private PagoUpdateListener listener;
 
@@ -52,21 +57,26 @@ public class ClasesMesesAdapter extends ArrayAdapter<ModeloClase> {
         TextView titulo_clase = view.findViewById(R.id.list_item_clase_mes__tv_titulo);
         titulo_clase.setText(clase.getNombre_clase());
 
-        TextView cantidad_meses_pagar = view.findViewById(R.id.list_item_clase_mes__tv_meses);
 
         Spinner spinner = view.findViewById(R.id.list_item_clase_mes__spinner_meses);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, meses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
                 String mesesSeleccionados = (String) parent.getItemAtPosition(i);
-                cantidad_meses_pagar.setText(mesesSeleccionados);
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                 double pagoFinalClase = clase.getPrecio() * Double.parseDouble(mesesSeleccionados);
                 listener.updatePago(pagoFinalClase, Integer.parseInt(mesesSeleccionados), position);
+
+                selectedMonthsMap.put(position, Integer.parseInt(mesesSeleccionados)); // Update the map
+                Log.d("adapter debugger", "Position: " + position + ", Selected Months: " + selectedMonthsMap.get(position));
+
+
             }
 
             @Override
@@ -78,5 +88,7 @@ public class ClasesMesesAdapter extends ArrayAdapter<ModeloClase> {
         return view;
     }
 
-
+    public Map<Integer, Integer> getSelectedMonthsMap() {
+        return selectedMonthsMap;
+    }
 }

@@ -2,16 +2,18 @@ package com.example.la_sala_project.modelos;
 
 public class ModeloPagaConNombre {
     private ModeloPaga paga;
-    private String tutorNombre;
-    private String tutorApellido;
+    private String hijoNombre;
+    private String hijoApellido;
+    private String claseNombre;
 
     public ModeloPagaConNombre() {
     }
 
-    public ModeloPagaConNombre(ModeloPaga paga, String tutorNombre, String tutorApellido) {
+    public ModeloPagaConNombre(ModeloPaga paga, String hijoNombre, String hijoApellido, String claseNombre) {
         this.paga = paga;
-        this.tutorNombre = tutorNombre;
-        this.tutorApellido = tutorApellido;
+        this.hijoNombre = hijoNombre;
+        this.hijoApellido = hijoApellido;
+        this.claseNombre = claseNombre;
     }
 
     public ModeloPaga getPaga() {
@@ -22,19 +24,27 @@ public class ModeloPagaConNombre {
         this.paga = paga;
     }
 
-    public String getTutorNombre() {
-        return tutorNombre;
+    public String getHijoNombre() {
+        return hijoNombre;
     }
 
-    public void setTutorNombre(String tutorNombre) {
-        this.tutorNombre = tutorNombre;
+    public void setHijoNombre(String hijoNombre) {
+        this.hijoNombre = hijoNombre;
     }
 
-    public String getTutorApellido() {
-        return tutorApellido;
+    public String getHijoApellido() {
+        return hijoApellido;
     }
 
-    public void setTutorApellido(String tutorApellido) {
-        this.tutorApellido = tutorApellido;
+    public void setHijoApellido(String hijoApellido) {
+        this.hijoApellido = hijoApellido;
+    }
+
+    public String getClaseNombre() {
+        return claseNombre;
+    }
+
+    public void setClaseNombre(String claseNombre) {
+        this.claseNombre = claseNombre;
     }
 }

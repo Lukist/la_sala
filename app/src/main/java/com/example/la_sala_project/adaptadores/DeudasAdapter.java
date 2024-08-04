@@ -14,21 +14,22 @@ import com.example.la_sala_project.Database.DBhelper;
 import com.example.la_sala_project.R;
 import com.example.la_sala_project.modelos.ModeloAlumno;
 import com.example.la_sala_project.modelos.ModeloDeuda;
+import com.example.la_sala_project.modelos.ModeloDeudaConNombre;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class DeudasAdapter extends ArrayAdapter<ModeloDeuda> {
+public class DeudasAdapter extends ArrayAdapter<ModeloDeudaConNombre> {
 
-    private List<ModeloDeuda> lista_deudas;
+    private List<ModeloDeudaConNombre> lista_deudas;
     private Context mContext;
     private int resourceLayout;
 
     private DBhelper dBhelper;
 
 
-    public DeudasAdapter(@NonNull Context context, int resource, DBhelper db, @NonNull List<ModeloDeuda> objects) {
+    public DeudasAdapter(@NonNull Context context, int resource, DBhelper db, @NonNull List<ModeloDeudaConNombre> objects) {
         super(context, resource, objects);
         lista_deudas = objects;
         mContext = context;
@@ -44,13 +45,14 @@ public class DeudasAdapter extends ArrayAdapter<ModeloDeuda> {
         if (view == null)
             view = LayoutInflater.from(mContext).inflate(resourceLayout, null);
 
-        ModeloDeuda deuda = lista_deudas.get(position);
+        ModeloDeudaConNombre deuda = lista_deudas.get(position);
 
-        TextView cantidad_deuda = view.findViewById(R.id.alumno_row__tv_nombre);
-        cantidad_deuda.setText("AR$ " + String.valueOf(deuda.getMonto_debido()));
+        TextView alumnoDeudor = view.findViewById(R.id.alumno_row__tv_nombre);
+        alumnoDeudor.setText(deuda.getAlumno_nombre() + " " + deuda.getAlumno_apellido());
 
-//        TextView alumnoDeudor = view.findViewById(R.id.alumno_row__tv_apellido);
-//        alumnoDeudor.setText(String.valueOf(dBhelper.buscarAlumno(deuda.getId_hijo()).getNombre()));
+        TextView cantidad_deuda = view.findViewById(R.id.alumno_row__tv_apellido);
+        cantidad_deuda.setText("AR$ " + String.valueOf(deuda.getDeuda().getMonto_debido()) + "\n" + deuda.getDeuda().getFecha_deuda() + "\n" + deuda.getClase_nombre());
+
 
         return view;
     }

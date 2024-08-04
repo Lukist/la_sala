@@ -12,4 +12,6 @@
     <color name="rosaPrincipal">#FCDEE0</color>
     <color name="celestePrincipal">#DEFCFA</color>
     <color name="rosaSecundario">#F8AFB4</color>
+    <color name="celesteSecundario">#11c2b6</color>
+    <color name="tranparente">#00ffffff</color>
 </resources>

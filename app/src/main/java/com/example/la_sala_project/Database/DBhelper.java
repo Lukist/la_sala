@@ -215,12 +215,16 @@ public class DBhelper extends SQLiteAssetHelper {
         return db.insert("deudores_table", null, cv);
     }
 
-    public List<ModeloDeuda> buscarDeudas() {
-        List<ModeloDeuda> returnList = new ArrayList<>();
+    public List<ModeloDeudaConNombre> buscarDeudas() {
+        List<ModeloDeudaConNombre> returnList = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
 
-        String query = "SELECT DISTINCT * FROM deudores_table WHERE deuda_cumplida_sn = 0";
+        String query = "SELECT d.*, a.nombre, a.apellido, c.nombre " +
+                "FROM deudores_table d " +
+                "JOIN hijo_table a ON d.id_hijo = a.id_hijo " +
+                "JOIN clases c ON d.id_clase = c.id_clase " +
+                "WHERE deuda_cumplida_sn == 0 ORDER BY d.id_deuda DESC";
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -235,9 +239,13 @@ public class DBhelper extends SQLiteAssetHelper {
                 double monto_debido = cursor.getDouble(6);
                 double monto_debido_pagado = cursor.getDouble(7);
                 int deuda_cumplida_sn = cursor.getInt(8);
+                String nombre_alumno = cursor.getString(9);
+                String apellido_alumno = cursor.getString(10);
+                String clase_nombre = cursor.getString(11);
 
                 ModeloDeuda deuda = new ModeloDeuda(id_deuda, id_tutor, id_hijo, id_clase,fecha_deuda, hora_deuda, monto_debido, monto_debido_pagado, deuda_cumplida_sn == 1);
-                returnList.add(deuda);
+                ModeloDeudaConNombre deudaConNombre = new ModeloDeudaConNombre(deuda, nombre_alumno, apellido_alumno, clase_nombre);
+                returnList.add(deudaConNombre);
             }while (cursor.moveToNext());
         }
 
@@ -465,7 +473,11 @@ public class DBhelper extends SQLiteAssetHelper {
 
         SQLiteDatabase db = getReadableDatabase();
 
-        String query = "SELECT p.*, t.nombre, t.apellido FROM recibo_table p JOIN tutor_table t ON p.id_tutor = t.id_tutor ORDER BY id_recibo DESC;";
+        String query = "SELECT p.*, a.nombre, a.apellido, c.nombre " +
+                "FROM recibo_table p " +
+                "JOIN hijo_table a ON p.id_hijo = a.id_hijo " +
+                "JOIN clases c ON p.id_clase = c.id_clase " +
+                "ORDER BY p.id_recibo DESC";
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -479,11 +491,12 @@ public class DBhelper extends SQLiteAssetHelper {
                 String fecha_pago = cursor.getString(5);
                 String hora_pago = cursor.getString(6);
                 double monto_pagado = cursor.getDouble(7);
-                String tutor_nombre = cursor.getString(8);
-                String tutor_apellido = cursor.getString(9);
+                String hijo_nombre = cursor.getString(8);
+                String hijo_apellido = cursor.getString(9);
+                String clase_nombre = cursor.getString(10);
 
                 ModeloPaga paga = new ModeloPaga(id_recibo, id_tutor, id_hijo, id_clase, id_deuda, fecha_pago, hora_pago, monto_pagado);
-                ModeloPagaConNombre pagaConNombre = new ModeloPagaConNombre(paga, tutor_nombre, tutor_apellido);
+                ModeloPagaConNombre pagaConNombre = new ModeloPagaConNombre(paga, hijo_nombre, hijo_apellido, clase_nombre);
                 listaReturn.add(pagaConNombre);
 
             }while (cursor.moveToNext());

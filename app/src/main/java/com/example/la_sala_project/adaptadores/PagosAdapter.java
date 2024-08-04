@@ -42,14 +42,15 @@ public class PagosAdapter extends ArrayAdapter<ModeloPagaConNombre> {
 
         ModeloPagaConNombre pago = lista_pagos.get(position);
 
-        TextView cantidadPago = view.findViewById(R.id.alumno_row__tv_nombre);
-        cantidadPago.setText("AR$ " + String.valueOf(pago.getPaga().getMonto_pagado()));
+        TextView nombreTutor = view.findViewById(R.id.alumno_row__tv_nombre);
+        nombreTutor.setText(pago.getHijoNombre() + " " + pago.getHijoApellido());
 
-        TextView nombreTutor = view.findViewById(R.id.alumno_row__tv_apellido);
-        nombreTutor.setText(pago.getTutorNombre());
-
+        TextView cantidadPago = view.findViewById(R.id.alumno_row__tv_apellido);
+        cantidadPago.setText("AR$ " + String.valueOf(pago.getPaga().getMonto_pagado()) + "\n" + pago.getPaga().getFecha_pago() + "\n" + pago.getClaseNombre());
 
 
         return view;
     }
+
+
 }

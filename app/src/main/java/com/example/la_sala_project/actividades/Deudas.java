@@ -2,12 +2,11 @@ package com.example.la_sala_project.actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,12 +18,11 @@ import com.example.la_sala_project.R;
 import com.example.la_sala_project.adaptadores.DeudasAdapter;
 import com.example.la_sala_project.adaptadores.PagosAdapter;
 import com.example.la_sala_project.modelos.ModeloDeuda;
-import com.example.la_sala_project.modelos.ModeloPaga;
+import com.example.la_sala_project.modelos.ModeloDeudaConNombre;
 import com.example.la_sala_project.modelos.ModeloPagaConNombre;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Deudas extends AppCompatActivity {
 
@@ -33,10 +31,10 @@ public class Deudas extends AppCompatActivity {
     DBhelper db;
     DeudasAdapter deudasAdapter;
     PagosAdapter pagosAdapter;
-    ImageButton imgbtn_visibilidadDeuda, imgbtn_visibilidadPago;
+    ImageButton imgbtn_visibilidadDeuda, imgbtn_visibilidadPago, imgbtn_agregarDeuda, imgbtn_agregarPago;
     EditText buscadorPagos, buscadorDeudas;
     List<ModeloPagaConNombre> listaDePagos, fitredList;
-    List<ModeloDeuda> listaDeDeudas, filtrosDeuda;
+    List<ModeloDeudaConNombre> listaDeDeudas, filtrosDeuda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +48,8 @@ public class Deudas extends AppCompatActivity {
         imgbtn_visibilidadDeuda = findViewById(R.id.activity_deudas__imgbtn_visibilidadDeudas);
         buscadorPagos = findViewById(R.id.activity_deudas__input_buscadorPagos);
         buscadorDeudas = findViewById(R.id.activity_deudas__input_buscadorDeudas);
+        imgbtn_agregarDeuda = findViewById(R.id.activity_deudas__imgbtn_agregarDeuda);
+        imgbtn_agregarPago = findViewById(R.id.activity_deudas__imgbtn_agregarPago);
 
 
         db = new DBhelper(Deudas.this);
@@ -92,6 +92,14 @@ public class Deudas extends AppCompatActivity {
             }
         });
 
+        imgbtn_agregarDeuda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Deudas.this, CreacionDeDeudas.class);
+                startActivity(intent);
+            }
+        });
+
         buscadorPagos.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -121,7 +129,7 @@ public class Deudas extends AppCompatActivity {
             String lowerCaseQuery = query.toLowerCase(); // Convert query to lowercase for case-insensitive search
 
             for (ModeloPagaConNombre paga : db.buscarPagos()) {
-                if (paga.getTutorNombre().toLowerCase().contains(lowerCaseQuery) || paga.getTutorApellido().toLowerCase().contains(lowerCaseQuery)) {
+                if (paga.getHijoNombre().toLowerCase().contains(lowerCaseQuery) || paga.getHijoApellido().toLowerCase().contains(lowerCaseQuery)) {
                     fitredList.add(paga);
                 }
             }

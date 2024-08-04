@@ -25,9 +25,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * Esta clase sirve como Lobby para acceder a las funciones principales de la aplicacion
+ * */
 public class MainActivity extends AppCompatActivity {
-
+    /**
+     * Inicializamos las variables
+     * */
     TextView titulo;
     TextView subtitulo;
 
@@ -39,16 +43,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**
+         * Asignamos valores por si elemento en el layout correspondiente
+         * */
         titulo = findViewById(R.id.Main_Relative__Textview_Bienvenido);
         subtitulo = findViewById(R.id.Main_Relative__subtitulo);
         btn_deudas = findViewById(R.id.Main_Relative__button_deudores);
         btn_alumnos = findViewById(R.id.Main_Relative__button_alumnos);
         btn_clases = findViewById(R.id.Main_Relative__button_clases);
 
+        /**
+         * Asignamos tipografia
+         * */
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/CabinSketch-Regular.ttf");
         titulo.setTypeface(typeface);
         subtitulo.setTypeface(typeface);
 
+        /**
+         * La activamos la alarma
+         * */
         setAlarm(getApplicationContext());
 
         db = new DBhelper(MainActivity.this);
